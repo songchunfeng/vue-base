@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        扩展:如果 有多个元素需要根据一个条件进行渲染，怎么办？我们可以用一个**`div标签`**来**`包裹多个元素`**，
+
+        但是这样的话 我们相当于**`多了一个div标签`**，我们可以采用一个**`template`**标签，来解决这个问题，template标签不会产生任何实质的标签在页面上，并且能完成相应的功能
+
+        > **`任务`**:
+        >
+        > 1. 定义一个Vue实例
+        > 2. 定义一个布尔型变量showMessage   
+        > 3. 分别使用v-if 和 v-show来条件渲染 P标签内容
+     -->
+    <div id="app">
+        <p v-if="showMessage"> 内容1</p>
+        <p v-show="showMessage">内容2</p>
+        <template v-if="showMessage">
+            <p> 内容3</p>
+            <p>内容4</p>
+        </template>
+        <template v-show="showMessage">
+            <p > 内容5</p>
+            <p >内容6</p>
+        </template>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                showMessage: true
+            }
+        })
+    </script>
+</body>
+
+</html>
