@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .default {
+            font-size: 50px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- class="{ class名称": 布尔值 }" -->
+        <!-- class和布尔值不能一样/default:default这样写会报错 -->
+        <p v-bind:class="{default:primary}">123</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        //         任务`**
+
+        // 1. 实例化一个Vue实例
+        // 2. 定义一个p标签 原有class 为default 
+        // 3. 使用v-bind对象语法将class变为 default primary
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                primary: false
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
