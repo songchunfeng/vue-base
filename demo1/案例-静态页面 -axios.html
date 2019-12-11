@@ -62,7 +62,7 @@
                     <td>{{item.title}}</td>
                     <td>{{item.date |formatDate('YYYY-MM-DD hh:mm:ss')}}</td>
                     <td>
-                        <a href="#" @click.prevent="delItem(index)">删除</a>
+                        <a href="#" @click.prevent="delItem(item.id)">删除</a>
                     </td>
                 </tr>
                 <tr v-if="!list.length">
@@ -73,6 +73,7 @@
     </div>
     <script src="../vue.js"></script>
     <script src="./moment.min.js"></script>
+    <script src="./axios.min.js"></script>
     <script>
         Vue.directive("focus", {
             inserted(dom) {
@@ -82,34 +83,37 @@
         var vm = new Vue({
             el: "#app",
             data: {
-                list: [{
-                    title: "北京",
-                    date: new Date()
-                }, {
-                    title: "上海",
-                    date: new Date()
-                }, {
-                    title: "杭州",
-                    date: new Date()
-                }],
+                list: [],
                 name: '', //双向绑定添加的内容
                 searchName: "" //双向绑定搜多内容
 
             },
             methods: {
                 addItem() {
-                    this.list.unshift({
+                    axios.post("http://localhost:3000/city", {
                         title: this.name,
                         date: new Date()
+                    }).then((result) => {
+                        if (result.status == 201) {
+                            this.getData();
+                            this.name = ""
+                        }
                     })
-                    this.name = ""
                 },
-                delItem(index) {
+                delItem(id) {
                     if (confirm("是否要删除")) {
-                        this.list = this.list.filter(function(item, i) {
-                            return i != index
+                        axios.delete(`http://localhost:3000/city/${id}`).then(() => {
+                            this.getData()
                         })
                     }
+                },
+                getData() {
+                    axios.get(" http://localhost:3000/city").then(result => {
+                        this.list = result.data;
+                        // console.log(result);
+
+
+                    })
                 }
             },
             filters: {
@@ -124,8 +128,10 @@
 
                     })
                 }
+            },
+            mounted() {
+                this.getData()
             }
-
         })
     </script>
 </body>
