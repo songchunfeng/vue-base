@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .select {
+            font-size: 40px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{list}}</p>
+        <!-- 监听谁的事件就在谁的标签上写监听 -->
+        <city v-for="item in list" :name="item" @changecity="receiveData" :current="currentCity"></city>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        //         - 任务`**
+
+        // 1. 上一小节基础上  实现 点击子组件的城市时,将当前点击的城市传递给父组件,
+        // 2. 父组件 将 当前点击城市 通过props再次传递给子组件 
+        // 3. 子组件 根据当前选中和循环项目比对 得出 哪个城市 得到 select class 
+        // 4. 对 select  class进行样式赋值,使其 字体大小为40px  字体颜色为红色
+        Vue.component("city", {
+            template: `
+                <li :class={select:selectClass} @click="clickCity">{{name}}</li>
+            `,
+            props: ["name", "current"],
+            methods: {
+                clickCity() {
+                    // this.$emit(自定义的事件名称,若干参数1......)  自定义事件名 全小写
+                    this.$emit("changecity", this.name)
+                }
+            },
+            computed: {
+                selectClass() {
+                    return this.name === this.current
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: ["北京", "上海", "天津", "深圳"],
+                currentCity: ""
+            },
+            methods: {
+                //reselect接收changecity传过来的this.name
+                receiveData(reselect) {
+                    this.currentCity = reselect
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>,

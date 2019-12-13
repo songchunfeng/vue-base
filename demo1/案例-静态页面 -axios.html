@@ -57,7 +57,7 @@
                     <th>创立时间</th>
                     <th>操作</th>
                 </tr>
-                <tr v-for="(item,index) in filterList">
+                <tr v-for="(item,index) in list">
                     <td>{{ index + 1 }}</td>
                     <td>{{item.title}}</td>
                     <td>{{item.date |formatDate('YYYY-MM-DD hh:mm:ss')}}</td>
@@ -131,6 +131,15 @@
             },
             mounted() {
                 this.getData()
+            },
+            watch: {
+                searchName(newValue) {
+                    axios.get(`http://localhost:3000/city?title_like=${newValue}`).then(
+                        result => {
+                            this.list = result.data
+                        }
+                    )
+                }
             }
         })
     </script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="city">
+        <ul>
+            <li v-for="item in list">
+                <span>{{item.name}}</span>
+                <span>{{item.money}}</span>
+            </li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        //         1   实现 city的双向绑定  
+
+        // ​        2  watch监听city的数据项改变 
+
+        // ​        3  改变函数中实现 
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                city: "",
+                list: [{
+                    name: "北京",
+                    money: 10000
+                }, {
+                    name: "北京",
+                    money: 20000
+                }, {
+                    name: "北京",
+                    money: 20000
+                }]
+            },
+            methods: {},
+            watch: {
+                city: function(newValue) {
+                    this.list = this.list.map(function(item) {
+                        item.name = newValue
+                        return item
+                    })
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

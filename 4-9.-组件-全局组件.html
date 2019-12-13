@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <el-button></el-button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 任务`** 实现一个全局组件 完成 加减步进器
+        Vue.component("el-button", {
+            template: `
+            <div>
+                <button @click="cutCount">-</button>
+                <span>{{count}}</span>
+                <button @click="addCount">+</button>
+                </div>`,
+            data: function() {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                addCount() {
+                    this.count++
+                },
+                cutCount() {
+                    this.count > 0 && this.count--
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

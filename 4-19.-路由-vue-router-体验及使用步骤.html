@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 任务`**: 
+
+        - 1 实现vue-router路由
+        - 2 设置 煎  炒   烹   炸 
+        - 3 分别设置四个导航对应四个菜品 -->
+    <div id="app">
+        <router-link to="/jian">煎</router-link>
+        <router-link to="/chao">炒</router-link>
+        <router-link to="/peng">烹</router-link>
+        <router-link to="/zha">炸</router-link>
+        <!-- 设置容器 -->
+        <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+        //  4 实例化 一个路由对象5
+        const router = new VueRouter({
+            // 5 配置路由表 => 一个地址 对应一个组件
+            routes: [{
+                path: "/jian",
+                component: {
+                    template: `<div>煎饺</div>`
+                }
+            }, {
+                path: "/chao",
+                component: {
+                    template: `<div>炒菜</div>`
+                }
+            }, {
+                path: "/peng",
+                component: {
+                    template: `<div>粉蒸肉</div>`
+                }
+            }, {
+                path: "/zha",
+                component: {
+                    template: `<div>炸鸡</div>`
+                }
+            }, ]
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // vue实例挂载router实例
+            router
+        });
+    </script>
+</body>
+
+</html>
