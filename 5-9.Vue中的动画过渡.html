@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+        }
+        
+        .a-enter,
+        .a-leave-to {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+        
+        .a-enter-active,
+        .a-leave-active {
+            transition: all 2s;
+        }
+    </style>
+</head>
+<!-- **`任务`**
+
+    1. 实现一个div 显示时 从小到大过渡
+    2. 实现该div隐藏时 从大到小 -->
+
+<body>
+    <div id="app">
+        <button @click="showOrHidden">点击</button>
+        <transition name="a">
+            <div class="box" v-if="show"></div>
+        </transition>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                showOrHidden() {
+                    this.show = !this.show
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
